@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id         Int      @id @default(autoincrement())
+  full_name  String
+  class_name String?
+  created_at DateTime @default(now())
+  exams      Exam[]
+
+  @@map("students")
+}
+
+model Subject {
+  id           Int        @id @default(autoincrement())
+  subject_name String
+  questions    Question[]
+  exams        Exam[]
+
+  @@map("subjects")
+}
+
+model Question {
+  id             Int      @id @default(autoincrement())
+  subject_id     Int
+  subject        Subject  @relation(fields: [subject_id], references: [id])
+  question       String
+  option_a       String
+  option_b       String
+  option_c       String
+  option_d       String
+  correct_answer String
+  answers        Answer[]
+
+  @@map("questions")
+}
+
+model Exam {
+  id            Int      @id @default(autoincrement())
+  student_id    Int
+  student       Student  @relation(fields: [student_id], references: [id])
+  subject_id    Int
+  subject       Subject  @relation(fields: [subject_id], references: [id])
+  score         Int
+  total_correct Int
+  total_wrong   Int
+  duration      Int // in seconds
+  created_at    DateTime @default(now())
+  answers       Answer[]
+
+  @@map("exams")
+}
+
+model Answer {
+  id             Int      @id @default(autoincrement())
+  exam_id        Int
+  exam           Exam     @relation(fields: [exam_id], references: [id])
+  question_id    Int
+  question       Question @relation(fields: [question_id], references: [id])
+  student_answer String
+
+  @@map("answers")
+}
