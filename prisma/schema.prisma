@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres.dywvwobiilbqspnbjzwq:%23%24A1a2a3a4a5a6a7@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
 }
 
 model Student {
@@ -50,7 +50,7 @@ model Exam {
   score         Int
   total_correct Int
   total_wrong   Int
-  duration      Int 
+  duration      Int // in seconds
   created_at    DateTime @default(now())
   answers       Answer[]
 
