@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Clock, ChevronLeft, ChevronRight, Send, AlertCircle } from 'lucide-react'
-import { toast } from 'sonner' // I'll add sonner later or use a simple alert
 
 interface Question {
   id: number
