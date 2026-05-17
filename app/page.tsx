@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma'
 import { LandingForm } from '@/components/landing-form'
 
+export const revalidate = 0; // Force fresh data
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {

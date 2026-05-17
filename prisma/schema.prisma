@@ -30,11 +30,11 @@ model Question {
   id             Int      @id @default(autoincrement())
   subject_id     Int
   subject        Subject  @relation(fields: [subject_id], references: [id])
-  question       String   @db.Text
-  option_a       String   @db.Text
-  option_b       String   @db.Text
-  option_c       String   @db.Text
-  option_d       String   @db.Text
+  question       String
+  option_a       String
+  option_b       String
+  option_c       String
+  option_d       String
   correct_answer String
   answers        Answer[]
 
@@ -50,7 +50,7 @@ model Exam {
   score         Int
   total_correct Int
   total_wrong   Int
-  duration      Int // in seconds
+  duration      Int 
   created_at    DateTime @default(now())
   answers       Answer[]
 
