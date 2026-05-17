@@ -1,17 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-import path from 'path'
 
 const prismaClientSingleton = () => {
-  // Path ini bekerja lebih stabil di Vercel untuk SQLite
-  const dbPath = path.join(process.cwd(), 'prisma', 'dev.db')
-  
-  return new PrismaClient({
-    datasources: {
-      db: {
-        url: `file:${dbPath}`,
-      },
-    },
-  })
+  return new PrismaClient()
 }
 
 declare global {
