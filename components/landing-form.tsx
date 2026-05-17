@@ -51,14 +51,36 @@ export function LandingForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* ... field lainnya ... */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+          <User size={16} className="text-blue-500" /> Nama Lengkap
+        </label>
+        <input
+          {...register('fullName')}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+          placeholder="Masukkan nama lengkap"
+        />
+        {errors.fullName && <p className="text-red-500 text-xs">{errors.fullName.message}</p>}
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+          <GraduationCap size={16} className="text-blue-500" /> Kelas (Opsional)
+        </label>
+        <input
+          {...register('className')}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+          placeholder="Contoh: XII TKJ 1"
+        />
+      </div>
+
       <div className="space-y-2">
         <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
           <BookOpen size={16} className="text-blue-500" /> Mata Pelajaran
         </label>
         <select
           {...register('subjectId')}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white"
         >
           <option value="">{loading ? 'Memuat mata pelajaran...' : 'Pilih Mata Pelajaran'}</option>
           {subjects.map((s) => (
@@ -70,7 +92,11 @@ export function LandingForm() {
         {errors.subjectId && <p className="text-red-500 text-xs">{errors.subjectId.message}</p>}
       </div>
 
-      <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 text-white py-3 rounded-lg">
+      <button
+        type="submit"
+        disabled={isSubmitting || loading}
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-lg transition-all disabled:opacity-50"
+      >
         {isSubmitting ? 'Memproses...' : 'Mulai Ujian'}
       </button>
     </form>
