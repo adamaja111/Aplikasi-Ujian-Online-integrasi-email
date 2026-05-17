@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma'
 import { LandingForm } from '@/components/landing-form'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const subjects = await prisma.subject.findMany()
 
