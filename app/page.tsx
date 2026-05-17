@@ -4,7 +4,12 @@ import { LandingForm } from '@/components/landing-form'
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const subjects = await prisma.subject.findMany()
+  let subjects = []
+  try {
+    subjects = await prisma.subject.findMany()
+  } catch (error) {
+    console.error('Database fetch error:', error)
+  }
 
   return (
     <main className="min-h-screen bg-linear-to-b from-blue-50 to-white flex flex-col items-center justify-center p-6">
