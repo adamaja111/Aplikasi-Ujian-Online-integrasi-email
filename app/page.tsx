@@ -4,7 +4,7 @@ import { LandingForm } from '@/components/landing-form'
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  let subjects = []
+  let subjects: { id: number; subject_name: string }[] = []
   try {
     subjects = await prisma.subject.findMany()
   } catch (error) {
